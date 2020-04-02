@@ -14,7 +14,8 @@ def main():
     select = "0"
     while select != "99":
         select = input("What would you like to do (use numbers to select)\n1.dump imports\n2.Find imports in a dll\n"
-                       "3.Try to define all imports (will most likely fail due to limitations)4.\n4.define an import"
+                       "3.Try to define all imports (will most likely fail due to limitations)4.\n4.define an import\n"
+                       "5.Dump strings"
                        "\n99.exit\n")
         if select == "1":
             dump_imports(pe)
@@ -24,6 +25,8 @@ def main():
             define_all(pe)
         if select == "4":
             define_import(input("What is the name of the import you wish to define?\n"))
+        if select == "5":
+            dump_strings(pe)
 
 def dump_dll_imports(pefile):
     dump_dll(pefile)
@@ -97,6 +100,19 @@ def define_import(name):
         else:
             description = "sorry no description could be found"
     print(name + ':   ' + description)
+
+def dump_strings(pefile):
+    pefile.full_load()
+    strings = pe.get_resources_strings()
+    stuff = pe.get_warnings()
+    print(pe.PE_TYPE)
+    if len(strings) != 0 or len(stuff) != 0:
+        for item in strings:
+            print(item)
+        # for item in stuff:
+        # print(item)
+    else:
+        print("empty")
 
 
 main()

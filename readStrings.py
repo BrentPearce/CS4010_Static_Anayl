@@ -4,12 +4,8 @@ import pefile
 class ReadStrings:
 
     @staticmethod
-    def read_strings(file):
-        pe = pefile.PE(file)
-        pe.full_load()
-        print("Loaded")
-        pe.write("fileinfo.txt")
-        print("written")
+    def dump_strings(pefile):
+        pefile.full_load()
         strings = pe.get_resources_strings()
         stuff = pe.get_warnings()
         print(pe.PE_TYPE)
