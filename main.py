@@ -2,7 +2,7 @@ import pefile
 from lxml import html
 import requests
 from googlesearch import search
-
+from pathlib import Path
 
 def main():
     try:
@@ -12,10 +12,14 @@ def main():
         print("file does not exist, try again?")
         main()
     select = "0"
+    vtResource = None
+    vtString = ""
     while select != "99":
         select = input("What would you like to do (use numbers to select)\n1.dump imports\n2.Find imports in a dll\n"
-                       "3.Try to define all imports (will most likely fail due to limitations)4.\n4.define an import\n"
-                       "5.Dump strings"
+                       "3.Try to define all imports (will most likely fail due to limitations)\n4.define an import\n"
+                       "5.Dump strings\n"
+                       "6.Upload file to Virus Total\n"
+                       "7.Get file report from Virus Total\n"
                        "\n99.exit\n")
         if select == "1":
             dump_imports(pe)
@@ -27,6 +31,10 @@ def main():
             define_import(input("What is the name of the import you wish to define?\n"))
         if select == "5":
             dump_strings(pe)
+        if select == "6":
+            vtResource = uploadForVTScan(exe_path)
+        if select == "7":
+         vtString = getVTFileReport(vtResource)
 
 def dump_dll_imports(pefile):
     dump_dll(pefile)
@@ -103,9 +111,9 @@ def define_import(name):
 
 def dump_strings(pefile):
     pefile.full_load()
-    strings = pe.get_resources_strings()
-    stuff = pe.get_warnings()
-    print(pe.PE_TYPE)
+    strings = pefile.get_resources_strings()
+    stuff = pefile.get_warnings()
+    print(pefile.PE_TYPE)
     if len(strings) != 0 or len(stuff) != 0:
         for item in strings:
             print(item)
@@ -113,6 +121,70 @@ def dump_strings(pefile):
         # print(item)
     else:
         print("empty")
+
+
+def uploadForVTScan(exe_path):
+    #################### Find out the file size ###########################
+    file = Path(exe_path)
+
+    fileSize = file.stat().st_size
+
+    #################### If it is smaller than 32 MB go ahead, otherwise terminate #################
+
+    if fileSize >= 33554432:  # 32 MB
+        print("file is too large, file must be smaller than 32MB")
+        return
+
+    else:
+        fileScanUrl = 'https://www.virustotal.com/vtapi/v2/file/scan'
+        apiKey = '041fb89143ff2506c8077674f4dc15e6ce0a16d74f76aabaa1945fee060acf91'
+        params = {'apikey': apiKey}
+
+        files = {'file': (exe_path, open(exe_path, 'rb'))}
+        #################### Ensure the file was successfully uploaded, if not print error message and quit.
+        uploadResponse = requests.post(fileScanUrl, files=files, params=params)
+        uploadStatCode = uploadResponse.status_code
+
+        #################### File was uploaded, get file upload ID.
+        if uploadStatCode == 200:
+            # get scan ID
+            scanID = uploadResponse.json()['resource']
+            print("The file was uploaded successfully. If you think it may have already been scanned previously "
+                  "\nfeel free to request the report now. Otherwise wait a couple of minutes for the analysis to"
+                  "finish.\n")
+            return scanID
+
+
+        #################### Some sort of error, if possible print error message, then end program.
+        elif uploadStatCode == 429:
+            print("Too many requests to virus total API. Limited to 4 requests per minute."
+                  "\nOr you may have exceeded daily the daily or weekly API limits\n")
+            return None
+        elif uploadStatCode == 401:
+            print("Authentication Error: Is the provided api key correct and activated?\n")
+            return None
+
+        else:
+            print("There was an error uploading the file to Virus total. Error: " + uploadStatCode + "\n")
+            return None
+
+
+def getVTFileReport(resource):
+    if resource == None:
+        print("File has not been uploaded to Virus Total")
+
+    else:
+        apiKey = '041fb89143ff2506c8077674f4dc15e6ce0a16d74f76aabaa1945fee060acf91'
+        # use upload ID to get the file analysis.
+        reportUrl = 'https://www.virustotal.com/vtapi/v2/file/report'
+
+        params = {'apikey': apiKey, 'resource': resource}
+
+        fileReport = requests.get(reportUrl, params=params)
+        fraction = [str(fileReport.json()['positives']), str(fileReport.json()['total'])]
+        vtString ="Detected by " + fraction[0]+ " of " + fraction[1] + " total anti-malware scans\n"
+        print(vtString)
+        return vtString
 
 
 main()

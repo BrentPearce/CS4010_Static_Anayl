@@ -67,8 +67,7 @@ def getVTFileReport(resource):
         fraction = [str(fileReport.json()['positives']), str(fileReport.json()['total'])]
         print("Detected by " + fraction[0]+ " of " + fraction[1] + " total anti-malware scans")
 
-def printPositiveScans():
-    return None
+
 
 def jprint(obj):
     # create a formatted string of the Python JSON object
@@ -78,10 +77,10 @@ def jprint(obj):
 
 path = input("Please enter the file to analyze\n")
 id = uploadForVTScan(path)
-#print("going to sleep a little bit")
-#time.sleep(30)
-#print("30 seconds")
-#time.sleep(30)
-#print("waking up:")
+print("going to sleep a little bit")
+time.sleep(30)
+print("30 seconds")
+time.sleep(30)
+print("waking up:")
 getVTFileReport(id)
 
