@@ -1,8 +1,10 @@
+import hashlib
 import pefile
 from lxml import html
 import requests
 from googlesearch import search
 from pathlib import Path
+
 
 def main():
     try:
@@ -13,13 +15,15 @@ def main():
         main()
     select = "0"
     vtResource = None
-    vtString = ""
+    permalink = None
+    detected_scans = []
     while select != "99":
         select = input("What would you like to do (use numbers to select)\n1.dump imports\n2.Find imports in a dll\n"
                        "3.Try to define all imports (will most likely fail due to limitations)\n4.define an import\n"
                        "5.Dump strings\n"
                        "6.Upload file to Virus Total\n"
                        "7.Get file report from Virus Total\n"
+                       "8.Use the file hash to get the report from Virus Total"
                        "\n99.exit\n")
         if select == "1":
             dump_imports(pe)
@@ -34,7 +38,35 @@ def main():
         if select == "6":
             vtResource = uploadForVTScan(exe_path)
         if select == "7":
-         vtString = getVTFileReport(vtResource)
+            vt_report = getVTFileReport(vtResource)
+            vt_string = vt_report[0]
+            print(vt_string)
+            detected_scans = vt_report[1]
+            ###By default the next three lines are commented out to aviod printing a possibly very large amount of info.
+            #print("The file was detected with the following scans: \n")
+            #for i in detected_scans:
+                #i.print_info()
+
+            permalink = vt_report[2]
+            print("A more complete scan report can be found at: \n" + permalink+ "\n")
+
+        if select == "8":
+            hashlib.md5()
+            with open(exe_path, 'rb') as file:
+                data = file.read()
+                hashlib.md5().update(data)
+                vtResource = hashlib.md5(data).hexdigest()
+            vt_report = getVTFileReport(vtResource)
+            vt_string = vt_report[0]
+            print(vt_string)
+            detected_scans = vt_report[1]
+            ###By default the next three lines are commented out to aviod printing a possibly very large amount of info.
+            #print("The file was detected with the following scans: \n")
+            #for i in detected_scans:
+                #i.print_info()
+
+            permalink = vt_report[2]
+            print("A more complete scan can be found at: \n" + permalink)
 
 def dump_dll_imports(pefile):
     dump_dll(pefile)
@@ -54,10 +86,12 @@ def dump_imports(pefile):
         for func in entry.imports:
             print((func.name.decode('utf-8')))
 
+
 def dump_dll(pefile):
     print("[*] Listing imported DLLs...")
     for entry in pefile.DIRECTORY_ENTRY_IMPORT:
         print('\t' + entry.dll.decode('utf-8'))
+
 
 def define_all(pefile):
     print("due to google limiting requests there might be issues with larger files")
@@ -109,6 +143,7 @@ def define_import(name):
             description = "sorry no description could be found"
     print(name + ':   ' + description)
 
+
 def dump_strings(pefile):
     pefile.full_load()
     strings = pefile.get_resources_strings()
@@ -151,7 +186,7 @@ def uploadForVTScan(exe_path):
             scanID = uploadResponse.json()['resource']
             print("The file was uploaded successfully. If you think it may have already been scanned previously "
                   "\nfeel free to request the report now. Otherwise wait a couple of minutes for the analysis to"
-                  "finish.\n")
+                  "finish, then press option 7.\n")
             return scanID
 
 
@@ -165,7 +200,7 @@ def uploadForVTScan(exe_path):
             return None
 
         else:
-            print("There was an error uploading the file to Virus total. Error: " + uploadStatCode + "\n")
+            print("There was an error uploading the file to Virus total. Error: " + str(uploadStatCode) + "\n")
             return None
 
 
@@ -182,9 +217,35 @@ def getVTFileReport(resource):
 
         fileReport = requests.get(reportUrl, params=params)
         fraction = [str(fileReport.json()['positives']), str(fileReport.json()['total'])]
-        vtString ="Detected by " + fraction[0]+ " of " + fraction[1] + " total anti-malware scans\n"
-        print(vtString)
-        return vtString
+        vtString = "Detected by " + fraction[0] + " of " + fraction[1] + " total anti-malware scans\n"
+        fileReport.encoding='JSON'
+        scans = fileReport.json()['scans']
+        detected_scans = []
+
+        for key in scans:
+            if scans[key]['detected'] is True:
+                version = str(scans[key]['version'])
+                result = str(scans[key]['result'])
+                update = str(scans[key]['update'])
+                positive_scan = VT_Scans(key,version,result, update)
+                detected_scans.append(positive_scan)
+
+        permalink = fileReport.json()['permalink']
+        vt_report = [vtString, detected_scans, permalink]
+        return vt_report
+
+
+class VT_Scans:
+    def __init__(self, name, version, result, update):
+        self.name = name
+        self.result = result
+        self.version = version
+        self.update = update
+
+    def print_info(self):
+        print(self.name + ":\n")
+        print("\tfound with version, update: " + self.version + ", " +self.update + "\n")
+        print("\tscan result: " + self.result + "\n")
 
 
 main()
