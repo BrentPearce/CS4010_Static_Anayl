@@ -74,6 +74,13 @@ def main():
 
 def dump_to_txt(path, pfile):
     file = open(path + "report.txt", "w")
+    file.writelines(path + " report\n\n\n")
+    pe_dict = pfile.dump_dict()
+    time_stamp = pe_dict['FILE_HEADER']['TimeDateStamp']['Value']
+    temp = time_stamp.split('[')
+    time_stamp = temp[1]
+    time_stamp = time_stamp[:-1]
+    file.writelines("File was created on : " + time_stamp + "\n")
     hashlib.md5()
     with open(path, 'rb') as tfile:
         data = tfile.read()
@@ -85,6 +92,7 @@ def dump_to_txt(path, pfile):
     file.writelines(dump_imports(pfile))
     file.writelines("\n\nStrings found:")
     file.writelines(dump_strings(pfile))
+
 
 
 def dump_dll_imports(pefile):
