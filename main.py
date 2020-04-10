@@ -73,52 +73,18 @@ def main():
 
 
 def dump_to_txt(path, pfile):
-    file1 = open(path + "report.txt", "w")
-    file1.writelines(virustotalcall(path))
-    file1.write("\n\nDll functions used:")
-    file1.writelines(dump_imports(pfile))
-    file1.write("\n\nStrings found:")
-    file1.writelines(dump_strings(pfile))
-
-
-def virustotalcall(path):
-    hasher = hashlib.md5()
-    with open(path, 'rb') as afile:
-        buf = afile.read()
-        hasher.update(buf)
-    scanners = "AhnLab-V3", "Alibaba", "Avast", "Avast-Mobile", "AVG", "Avira (no cloud)", "CAT-QuickHeal", "Comodo", \
-               "Cyren", "DrWeb", "ESET-NOD32", "F-Prot", "F-Secure", "Fortinet", "Ikarus", "Jiangmin", "K7GW", \
-               "Kaspersky", "MAX", "McAfee", "McAfee-GW-Edition", "Microsoft", "NANO-Antivirus", "Qihoo-360", "Rising", \
-               "Sangfor Engine Zero", "Sophos AV", "Symantec", "Symantec Mobile Insight", "Tencent", "TrendMicro", \
-               "TrendMicro-HouseCall", "VBA32", "Yandex", "ZoneAlarm by Check Point", "Zoner", "Ad-Aware", "Antiy-AVL", \
-               "Arcabit", "Baidu", "BitDefender", "BitDefenderTheta", "Bkav", "ClamAV", "CMC", "Emsisoft", "eScan", \
-               "FireEye", "GData", "K7AntiVirus", "Kingsoft", "MaxSecure", "Panda", "SentinelOne (Static ML)", \
-               "SUPERAntiSpyware", "TACHYON", "VIPRE", "ViRobot", "Zillya", "Acronis", "SecureAge APEX", \
-               "CrowdStrike Falcon", "Cybereason", "Cylance", "eGambit", "Endgame", "Palo Alto Networks", \
-               "Sophos ML", "Trapmine"
-    url = 'https://www.virustotal.com/vtapi/v2/file/report'
-    params = {'apikey': '4862a9a25c38287098e5d824cf56e6ff48b2651223014efb3b3f33abf67d2acc',
-              'resource': path}
-    # "07fad8685d27325994755554f62947f87acbd0f2"
-    temp = []
-    response = requests.get(url, params=params)
-    try:
-        temp.append("using " + str(response.json()['total']) + " virus scanners this file was detected "
-                    + str(response.json()['positives']) + " times\n")
-    except:
-        pass
-    for entry in scanners:
-        try:
-            if str(response.json()['scans'][entry]['result']) != 'None':
-                temp.append(entry + " detected as: " + str(response.json()['scans'][entry]['result']) + "\n")
-        except:
-            pass
-    try:
-        print(temp)
-    except:
-        print("no such hash could be found")
-        pass
-    return temp
+    file = open(path + "report.txt", "w")
+    hashlib.md5()
+    with open(path, 'rb') as tfile:
+        data = tfile.read()
+        hashlib.md5().update(data)
+        vtResource = hashlib.md5(data).hexdigest()
+    for element in getVTFileReport(vtResource)[1]:
+        file.writelines(element.print_info())
+    file.writelines("\n\nDll functions used:")
+    file.writelines(dump_imports(pfile))
+    file.writelines("\n\nStrings found:")
+    file.writelines(dump_strings(pfile))
 
 
 def dump_dll_imports(pefile):
@@ -308,9 +274,14 @@ class VT_Scans:
         self.update = update
 
     def print_info(self):
+        arr = []
         print(self.name + ":\n")
+        arr.append(self.name + ":\n")
         print("\tfound with version, update: " + self.version + ", " + self.update + "\n")
+        arr.append("\tfound with version, update: " + self.version + ", " + self.update + "\n")
         print("\tscan result: " + self.result + "\n")
+        arr.append("\tscan result: " + self.result + "\n")
+        return arr
 
 
 main()
