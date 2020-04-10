@@ -23,7 +23,8 @@ def main():
                        "5.Dump strings\n"
                        "6.Upload file to Virus Total\n"
                        "7.Get file report from Virus Total\n"
-                       "8.Use the file hash to get the report from Virus Total"
+                       "8.Use the file hash to get the report from Virus Total\n"
+                       "9.Output all information to a .txt file"
                        "\n99.exit\n")
         if select == "1":
             dump_imports(pe)
@@ -43,12 +44,12 @@ def main():
             print(vt_string)
             detected_scans = vt_report[1]
             ###By default the next three lines are commented out to aviod printing a possibly very large amount of info.
-            #print("The file was detected with the following scans: \n")
-            #for i in detected_scans:
-                #i.print_info()
+            # print("The file was detected with the following scans: \n")
+            # for i in detected_scans:
+            # i.print_info()
 
             permalink = vt_report[2]
-            print("A more complete scan report can be found at: \n" + permalink+ "\n")
+            print("A more complete scan report can be found at: \n" + permalink + "\n")
 
         if select == "8":
             hashlib.md5()
@@ -61,30 +62,90 @@ def main():
             print(vt_string)
             detected_scans = vt_report[1]
             ###By default the next three lines are commented out to aviod printing a possibly very large amount of info.
-            #print("The file was detected with the following scans: \n")
-            #for i in detected_scans:
-                #i.print_info()
+            # print("The file was detected with the following scans: \n")
+            # for i in detected_scans:
+            # i.print_info()
 
             permalink = vt_report[2]
             print("A more complete scan can be found at: \n" + permalink)
+        if select == "9":
+            dump_to_txt(exe_path, pe)
+
+
+def dump_to_txt(path, pfile):
+    file1 = open(path + "report.txt", "w")
+    file1.writelines(virustotalcall(path))
+    file1.write("\n\nDll functions used:")
+    file1.writelines(dump_imports(pfile))
+    file1.write("\n\nStrings found:")
+    file1.writelines(dump_strings(pfile))
+
+
+def virustotalcall(path):
+    hasher = hashlib.md5()
+    with open(path, 'rb') as afile:
+        buf = afile.read()
+        hasher.update(buf)
+    scanners = "AhnLab-V3", "Alibaba", "Avast", "Avast-Mobile", "AVG", "Avira (no cloud)", "CAT-QuickHeal", "Comodo", \
+               "Cyren", "DrWeb", "ESET-NOD32", "F-Prot", "F-Secure", "Fortinet", "Ikarus", "Jiangmin", "K7GW", \
+               "Kaspersky", "MAX", "McAfee", "McAfee-GW-Edition", "Microsoft", "NANO-Antivirus", "Qihoo-360", "Rising", \
+               "Sangfor Engine Zero", "Sophos AV", "Symantec", "Symantec Mobile Insight", "Tencent", "TrendMicro", \
+               "TrendMicro-HouseCall", "VBA32", "Yandex", "ZoneAlarm by Check Point", "Zoner", "Ad-Aware", "Antiy-AVL", \
+               "Arcabit", "Baidu", "BitDefender", "BitDefenderTheta", "Bkav", "ClamAV", "CMC", "Emsisoft", "eScan", \
+               "FireEye", "GData", "K7AntiVirus", "Kingsoft", "MaxSecure", "Panda", "SentinelOne (Static ML)", \
+               "SUPERAntiSpyware", "TACHYON", "VIPRE", "ViRobot", "Zillya", "Acronis", "SecureAge APEX", \
+               "CrowdStrike Falcon", "Cybereason", "Cylance", "eGambit", "Endgame", "Palo Alto Networks", \
+               "Sophos ML", "Trapmine"
+    url = 'https://www.virustotal.com/vtapi/v2/file/report'
+    params = {'apikey': '4862a9a25c38287098e5d824cf56e6ff48b2651223014efb3b3f33abf67d2acc',
+              'resource': "07fad8685d27325994755554f62947f87acbd0f2"}
+    # "07fad8685d27325994755554f62947f87acbd0f2"
+    temp = []
+    response = requests.get(url, params=params)
+    try:
+        temp.append("using " + str(response.json()['total']) + " virus scanners this file was detected "
+                    + str(response.json()['positives']) + " times\n")
+    except:
+        pass
+    for entry in scanners:
+        try:
+            if str(response.json()['scans'][entry]['result']) != 'None':
+                temp.append(entry + " detected as: " + str(response.json()['scans'][entry]['result']) + "\n")
+        except:
+            pass
+    try:
+        print(temp)
+    except:
+        print("no such hash could be found")
+        pass
+    return temp
+
 
 def dump_dll_imports(pefile):
     dump_dll(pefile)
     name = input("What dll would you like to use?\n")
+    arr = [];
     for entry in pefile.DIRECTORY_ENTRY_IMPORT:
         dll_name = entry.dll.decode('utf-8')
         if dll_name == name:
             print("[*] " + dll_name + " imports:")
+            arr.append("[*] " + dll_name + " imports:\n")
             for func in entry.imports:
                 print((func.name.decode('utf-8')))
+                arr.append((func.name.decode('utf-8')) + "\n")
+    return arr
 
 
 def dump_imports(pefile):
+    arr = []
     for entry in pefile.DIRECTORY_ENTRY_IMPORT:
         dll_name = entry.dll.decode('utf-8')
-        print("[*] " + dll_name + " imports:")
+        print("[*] " + dll_name + " imports:\n\n")
+        arr.append("[*] " + dll_name + " imports:\n\n")
         for func in entry.imports:
-            print((func.name.decode('utf-8')))
+            print((func.name.decode('utf-8')) + "\n")
+            arr.append((func.name.decode('utf-8')) + "\n")
+    return arr
 
 
 def dump_dll(pefile):
@@ -148,14 +209,18 @@ def dump_strings(pefile):
     pefile.full_load()
     strings = pefile.get_resources_strings()
     stuff = pefile.get_warnings()
+    arr = [];
     print(pefile.PE_TYPE)
     if len(strings) != 0 or len(stuff) != 0:
         for item in strings:
             print(item)
+            arr.append(item + "\n")
         # for item in stuff:
         # print(item)
     else:
         print("empty")
+        arr.append("empty")
+    return arr
 
 
 def uploadForVTScan(exe_path):
@@ -218,7 +283,7 @@ def getVTFileReport(resource):
         fileReport = requests.get(reportUrl, params=params)
         fraction = [str(fileReport.json()['positives']), str(fileReport.json()['total'])]
         vtString = "Detected by " + fraction[0] + " of " + fraction[1] + " total anti-malware scans\n"
-        fileReport.encoding='JSON'
+        fileReport.encoding = 'JSON'
         scans = fileReport.json()['scans']
         detected_scans = []
 
@@ -227,7 +292,7 @@ def getVTFileReport(resource):
                 version = str(scans[key]['version'])
                 result = str(scans[key]['result'])
                 update = str(scans[key]['update'])
-                positive_scan = VT_Scans(key,version,result, update)
+                positive_scan = VT_Scans(key, version, result, update)
                 detected_scans.append(positive_scan)
 
         permalink = fileReport.json()['permalink']
@@ -244,7 +309,7 @@ class VT_Scans:
 
     def print_info(self):
         print(self.name + ":\n")
-        print("\tfound with version, update: " + self.version + ", " +self.update + "\n")
+        print("\tfound with version, update: " + self.version + ", " + self.update + "\n")
         print("\tscan result: " + self.result + "\n")
 
 
