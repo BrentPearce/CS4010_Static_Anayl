@@ -98,7 +98,7 @@ def virustotalcall(path):
                "Sophos ML", "Trapmine"
     url = 'https://www.virustotal.com/vtapi/v2/file/report'
     params = {'apikey': '4862a9a25c38287098e5d824cf56e6ff48b2651223014efb3b3f33abf67d2acc',
-              'resource': "07fad8685d27325994755554f62947f87acbd0f2"}
+              'resource': path}
     # "07fad8685d27325994755554f62947f87acbd0f2"
     temp = []
     response = requests.get(url, params=params)
