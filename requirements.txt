@@ -1,0 +1,9 @@
+Requirements
+This program was created and tested using Python version 3.8 Additionally in order to use the program the following packages must be installed in the users environment or virtual environment:
+
+pefile
+hashlib
+requests
+googlesearch
+libpath
+lxml
