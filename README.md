@@ -40,6 +40,8 @@ Format: ![Alt Text](https://github.com/BrentPearce/CS4010_Static_Anayl/blob/mast
 using 9 you can create a .txt file with most of the information from the other requests in it.
 below is an example:
 
-https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample)
+
 
 the file will be created in the same folder as the program. 
