@@ -23,12 +23,17 @@ After the program is called the user is asked for the path to the file. As
 shown below. If the user enters an incorrect file path the prompt is repeated
 until an existing PE file path is entered.
 
-TODO: Insert photo of being prompted for file 
-
 After the file path is provided the program displays a numbered menu, and by 
 entering a numbers the corresponding report is printed to the screen. For 
 example, if the user enters the number 5 and presses enter, then the dump 
 strings option will be executed(all the strings used in the program will be 
 printed to the terminal).
+https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/firstmenu.png?raw=true
 
- 
+You can also request definitions of dlls (3) or (4), 3 has issues due to 
+google request limits but 4 lets you define only the dll functions you want to. 
+https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/define.png?raw=true
+
+using 9 you can create a .txt file with most of the informatoin from the other requests in it.
+below is an example:
+https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample
