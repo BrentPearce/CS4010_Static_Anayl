@@ -29,7 +29,9 @@ example, if the user enters the number 5 and presses enter, then the dump
 strings option will be executed(all the strings used in the program will be 
 printed to the terminal).
 
-https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/firstmenu.png?raw=true
+![GitHub Logo](/images/logo.png)
+Format: ![Alt Text](https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/firstmenu.png?raw=true
+)
 
 You can also request definitions of dlls (3) or (4), 3 has issues due to 
 google request limits but 4 lets you define only the dll functions you want to. 
@@ -40,8 +42,6 @@ Format: ![Alt Text](https://github.com/BrentPearce/CS4010_Static_Anayl/blob/mast
 using 9 you can create a .txt file with most of the information from the other requests in it.
 below is an example:
 
-![GitHub Logo](/images/logo.png)
-Format: ![Alt Text](https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample)
-
+https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample
 
 the file will be created in the same folder as the program. 
