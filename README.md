@@ -36,7 +36,7 @@ google request limits but 4 lets you define only the dll functions you want to.
 
 https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/define.png?raw=true
 
-using 9 you can create a .txt file with most of the informatoin from the other requests in it.
+using 9 you can create a .txt file with most of the information from the other requests in it.
 below is an example:
 
 https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample
