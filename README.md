@@ -36,4 +36,5 @@ https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/
 
 using 9 you can create a .txt file with most of the informatoin from the other requests in it.
 below is an example:
+
 https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/textexample
