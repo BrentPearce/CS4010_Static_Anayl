@@ -28,10 +28,12 @@ entering a numbers the corresponding report is printed to the screen. For
 example, if the user enters the number 5 and presses enter, then the dump 
 strings option will be executed(all the strings used in the program will be 
 printed to the terminal).
+
 https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/firstmenu.png?raw=true
 
 You can also request definitions of dlls (3) or (4), 3 has issues due to 
 google request limits but 4 lets you define only the dll functions you want to. 
+
 https://github.com/BrentPearce/CS4010_Static_Anayl/blob/master/resources/images/define.png?raw=true
 
 using 9 you can create a .txt file with most of the informatoin from the other requests in it.
