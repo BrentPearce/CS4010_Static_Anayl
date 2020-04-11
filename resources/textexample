@@ -1,0 +1,317 @@
+temp.exe report
+File was created on : Mon Oct 14 19:13:42 2019 UTC
+Bkav:
+    found with version, update: 1.3.0.9899, 20200309
+    scan result: W32.HfsAdware.1166
+DrWeb:
+    found with version, update: 7.0.44.12030, 20200309
+    scan result: Adware.MyWebSearch.84
+CAT-QuickHeal:
+    found with version, update: 14.00, 20200309
+    scan result: PUA.Mindsparki1.Gen
+Cylance:
+    found with version, update: 2.3.1.101, 20200309
+    scan result: Unsafe
+Zillya:
+    found with version, update: 2.0.0.4044, 20200309
+    scan result: Adware.AdLoadCRT.Win32.530
+SUPERAntiSpyware:
+    found with version, update: 5.6.0.1032, 20200306
+    scan result: PUP.MindSpark/Variant
+Sangfor:
+    found with version, update: 1.0, 20200306
+    scan result: Malware
+K7GW:
+    found with version, update: 11.97.33481, 20200309
+    scan result: Trojan ( 0052359d1 )
+K7AntiVirus:
+    found with version, update: 11.96.33471, 20200309
+    scan result: Trojan ( 0052359d1 )
+ESET-NOD32:
+    found with version, update: 20968, 20200309
+    scan result: a variant of Win32/Toolbar.MyWebSearch potentially unwanted
+Avast:
+    found with version, update: 18.4.3895.0, 20200309
+    scan result: Win32:Adware-RR [PUP]
+NANO-Antivirus:
+    found with version, update: 1.0.134.25032, 20200309
+    scan result: Riskware.Win32.Mywebsearch.dsymo
+Tencent:
+    found with version, update: 1.0.0.1, 20200309
+    scan result: Win32.Trojan.Falsesign.Htmj
+Endgame:
+    found with version, update: 3.0.17, 20200226
+    scan result: malicious (high confidence)
+Comodo:
+    found with version, update: 32181, 20200309
+    scan result: ApplicUnwnt@#32k94n3wyzwgk
+VIPRE:
+    found with version, update: 82110, 20200309
+    scan result: MyWebSearch.J (v) (not malicious)
+FireEye:
+    found with version, update: 29.7.0.0, 20200305
+    scan result: Generic.mg.2d75cc1bf8e57872
+Emsisoft:
+    found with version, update: 2018.12.0.1641, 20200309
+    scan result: Application.Toolbar (A)
+Webroot:
+    found with version, update: 1.0.0.403, 20200309
+    scan result: Pua.Mywebsearch
+Fortinet:
+    found with version, update: 6.2.142.0, 20200309
+    scan result: Riskware/MyWebSearch
+Antiy-AVL:
+    found with version, update: 3.0.0.1, 20200309
+    scan result: GrayWare[Toolbar]/Win32.MyWebSearch
+Microsoft:
+    found with version, update: 1.1.16800.2, 20200309
+    scan result: PUA:Win32/MyWebSearch
+Arcabit:
+    found with version, update: 1.0.0.870, 20200309
+    scan result: PUP.WebToolbar.MyWebSearch
+GData:
+    found with version, update: A:25.25105B:26.17952, 20200309
+    scan result: Win32.Adware.Mindspark.E
+AhnLab-V3:
+    found with version, update: 3.17.3.26870, 20200309
+    scan result: Win-PUP/Mindspark.Exp
+VBA32:
+    found with version, update: 4.3.0, 20200309
+    scan result: Adware.MyWebSearch
+Malwarebytes:
+    found with version, update: 3.6.4.335, 20200309
+    scan result: PUP.Optional.MyWebSearch
+TrendMicro-HouseCall:
+    found with version, update: 10.0.0.1040, 20200309
+    scan result: TROJ_GEN.R002H0CKN19
+Rising:
+    found with version, update: 25.0.0.24, 20200309
+    scan result: Trojan.Win32.Generic.15246B1B (C64:YzY0OuhdpdEjoKVd)
+Yandex:
+    found with version, update: 5.5.2.24, 20200306
+    scan result: PUA.Toolbar!
+eGambit:
+    found with version, update: None, 20200309
+    scan result: Generic.Adware
+AVG:
+    found with version, update: 18.4.3895.0, 20200309
+    scan result: Win32:Adware-RR [PUP]
+MaxSecure:
+    found with version, update: 1.0.0.1, 20200309
+    scan result: not-a-virus:WebToolbar.Win32.MyWebSearch.sy
+Dll functions used:[*] KERNEL32.dll imports:
+SubmitThreadpoolWork
+DecodePointer
+InitializeCriticalSectionEx
+CreateThreadpoolWork
+CloseThreadpoolWork
+GetCurrentProcessId
+GetLocalTime
+LocalFree
+HeapReAlloc
+HeapAlloc
+GetCurrentProcess
+HeapFree
+GetModuleHandleW
+GetCurrentThread
+GetProcessHeap
+Sleep
+HeapDestroy
+GetProcAddress
+HeapSize
+CloseHandle
+EncodePointer
+IsDebuggerPresent
+IsProcessorFeaturePresent
+QueryPerformanceCounter
+GetSystemTimeAsFileTime
+OutputDebugStringW
+DebugBreak
+GetCurrentThreadId
+DeleteCriticalSection
+CloseThreadpool
+HeapSetInformation
+SetThreadpoolThreadMinimum
+EnterCriticalSection
+CloseThreadpoolCleanupGroupMembers
+CreateThreadpoolCleanupGroup
+GetLastError
+LeaveCriticalSection
+SetThreadpoolThreadMaximum
+CreateThreadpool
+InitializeCriticalSection
+CloseThreadpoolCleanupGroup
+[*] USER32.dll imports:
+DispatchMessageW
+GetMessageW
+TranslateMessage
+[*] ADVAPI32.dll imports:
+GetLengthSid
+GetSecurityDescriptorSacl
+AddAce
+InitializeSid
+GetSidLengthRequired
+IsValidSid
+GetSecurityDescriptorOwner
+SetSecurityDescriptorOwner
+InitializeAcl
+MakeAbsoluteSD
+SetSecurityDescriptorDacl
+InitializeSecurityDescriptor
+GetSecurityDescriptorControl
+GetSecurityDescriptorDacl
+EventUnregister
+EventRegister
+CopySid
+EventWrite
+GetAclInformation
+GetTokenInformation
+SetSecurityDescriptorGroup
+OpenThreadToken
+GetSidSubAuthority
+OpenProcessToken
+GetSecurityDescriptorGroup
+ConvertSidToStringSidW
+[*] ole32.dll imports:
+CoInitializeEx
+CoCreateInstance
+CoUninitialize
+[*] MSVCP120.dll imports:
+?_Getcvt@_Locinfo@std@@QEBA?AU_Cvtvec@@XZ
+??1_Locinfo@std@@QEAA@XZ
+??0_Locinfo@std@@QEAA@PEBD@Z
+?_Getlconv@_Locinfo@std@@QEBAPEBUlconv@@XZ
+?_Getfalse@_Locinfo@std@@QEBAPEBDXZ
+?_Gettrue@_Locinfo@std@@QEBAPEBDXZ
+??1_Facet_base@std@@UEAA@XZ
+??Bid@locale@std@@QEAA_KXZ
+?_Incref@facet@locale@std@@UEAAXXZ
+?_Decref@facet@locale@std@@UEAAPEAV_Facet_base@3@XZ
+??0facet@locale@std@@IEAA@_K@Z
+??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV01@_K@Z
+??_7_Facet_base@std@@6B@
+_Mbrtowc
+??_7facet@locale@std@@6B@
+?classic@locale@std@@SAAEBV12@XZ
+?_Init@locale@std@@CAPEAV_Locimp@12@_N@Z
+?_Getgloballocale@locale@std@@CAPEAV_Locimp@12@XZ
+??0_Lockit@std@@QEAA@H@Z
+??1_Lockit@std@@QEAA@XZ
+?id@?$numpunct@_W@std@@2V0locale@2@A
+?exceptions@ios_base@std@@QEAAXH@Z
+??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV01@P6AAEAV01@AEAV01@@Z@Z
+??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV01@K@Z
+?widen@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QEBA_WD@Z
+?put@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV12@_W@Z
+??1?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UEAA@XZ
+?_Lock@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UEAAXXZ
+?_Unlock@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@UEAAXXZ
+?showmanyc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAA_JXZ
+?uflow@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAAGXZ
+?xsgetn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAA_JPEA_W_J@Z
+?xsputn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAA_JPEB_W_J@Z
+?setbuf@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAAPEAV12@PEA_W_J@Z
+?sync@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAAHXZ
+?imbue@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@MEAAXAEBVlocale@2@@Z
+??1?$basic_ios@_WU?$char_traits@_W@std@@@std@@UEAA@XZ
+?setstate@?$basic_ios@_WU?$char_traits@_W@std@@@std@@QEAAXH_N@Z
+??1?$basic_ostream@_WU?$char_traits@_W@std@@@std@@UEAA@XZ
+??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV01@P6AAEAVios_base@1@AEAV21@@Z@Z
+??6?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV01@H@Z
+??1?$basic_iostream@_WU?$char_traits@_W@std@@@std@@UEAA@XZ
+?setg@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IEAAXPEA_W00@Z
+?setp@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IEAAXPEA_W0@Z
+?_Pninc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IEAAPEA_WXZ
+??0?$basic_ios@_WU?$char_traits@_W@std@@@std@@IEAA@XZ
+??0?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAA@PEAV?$basic_streambuf@_WU?$char_traits@_W@std@@@1@_N@Z
+??0?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@IEAA@XZ
+?_Osfx@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAXXZ
+?flush@?$basic_ostream@_WU?$char_traits@_W@std@@@std@@QEAAAEAV12@XZ
+?sputc@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QEAAG_W@Z
+?sputn@?$basic_streambuf@_WU?$char_traits@_W@std@@@std@@QEAA_JPEB_W_J@Z
+??0?$basic_iostream@_WU?$char_traits@_W@std@@@std@@QEAA@PEAV?$basic_streambuf@_WU?$char_traits@_W@std@@@1@@Z
+?uncaught_exception@std@@YA_NXZ
+?_BADOFF@std@@3_JB
+?setw@std@@YA?AU?$_Smanip@_J@1@_J@Z
+?_Orphan_all@_Container_base0@std@@QEAAXXZ
+?_Xlength_error@std@@YAXPEBD@Z
+?_Xout_of_range@std@@YAXPEBD@Z
+?_Xbad_alloc@std@@YAXXZ
+?_Syserror_map@std@@YAPEBDH@Z
+?_Winerror_map@std@@YAPEBDH@Z
+??1facet@locale@std@@MEAA@XZ
+[*] MSVCR120.dll imports:
+__crtSetUnhandledExceptionFilter
+?_type_info_dtor_internal_method@type_info@@QEAAXXZ
+memset
+memmove_s
+_wcsicmp
+calloc
+malloc
+_resetstkoflw
+memcpy_s
+__crtCapturePreviousContext
+__crtTerminateProcess
+__crtUnhandledException
+__crt_debugger_hook
+_commode
+_fmode
+_wcmdln
+_initterm
+_initterm_e
+__setusermatherr
+_configthreadlocale
+_cexit
+_exit
+exit
+__CxxFrameHandler3
+__set_app_type
+__wgetmainargs
+_amsg_exit
+__crtGetShowWindowMode
+_XcptFilter
+_onexit
+__C_specific_handler
+__dllonexit
+_calloc_crt
+_unlock
+_lock
+free
+??0bad_cast@std@@QEAA@AEBV01@@Z
+??0bad_cast@std@@QEAA@PEBD@Z
+??1bad_cast@std@@UEAA@XZ
+swprintf_s
+??_V@YAXPEAX@Z
+iswdigit
+_wtoi
+??2@YAPEAX_K@Z
+?terminate@@YAXXZ
+strrchr
+??3@YAXPEAX@Z
+_purecall
+memmove
+??0exception@std@@QEAA@AEBV01@@Z
+??0exception@std@@QEAA@AEBQEBDH@Z
+??1exception@std@@UEAA@XZ
+?what@exception@std@@UEBAPEBDXZ
+_stricmp
+_CxxThrowException
+memcmp
+memcpy
+[*] RPCRT4.dll imports:
+NdrServerCall2
+RpcServerUseProtseqEpW
+RpcServerUnregisterIf
+RpcServerRegisterAuthInfoW
+RpcServerRegisterIf2
+RpcImpersonateClient
+RpcBindingInqAuthClientW
+RpcServerListen
+RpcRevertToSelf
+[*] SHELL32.dll imports:
+SHCreateItemFromParsingName
+SHChangeNotify
+[*] USERENV.dll imports:
+UnloadUserProfile
+
+Strings found:empty
